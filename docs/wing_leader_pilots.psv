@@ -1,0 +1,28 @@
+id|name|faction|rarity|piloting|gunnery|systems|certifications
+pil-ani|Anakin Skywalker|Galactic Republic|veryRare|9|9|5|All
+pil-poe|Poe Dameron|Resistance|rare|9|8|3|All
+pil-luk|Luke Skywalker|Rebel|uncommon|8|8|5|T-65 X-wing, X-wing, Starfighter
+pil-fel|Soontir Fel|Empire|uncommon|8|8|4|TIE/ln Fighter, TIE/IN Interceptor, TIE, Interceptor
+pil-kyl|Kylo Ren|First Order|uncommon|8|9|5|TIE/wi Whisper, TIE, Starfighter
+pil-gri|General Grievous|Separatist|uncommon|9|8|3|Belbullab-22, Belbullab, Starfighter
+pil-rey|Rey|Resistance|common|7|7|4|YT-1300 Freighter, YT, Freighter, Starfighter
+pil-wed|Wedge Antilles|Rebel|uncommon|9|6|4|T-65 X-wing, X-wing, BTL Y-wing, Y-wing, Starfighter
+pil-ide|Iden Versio|Empire|uncommon|5|8|4|TIE/ln Fighter, TIE/IN Interceptor, TIE, Starfighter
+pil-bho|Bhodi Rook|Empire|common|6|4|7|Lambda-class Shuttle, Shuttle, Freighter
+pil-von|Major Vonreg|First Order|common|7|7|4|TIE/fo Fighter, TIE, Interceptor
+pil-ven|Asajj Ventress|Separatist|common|7|4|7|Fanblade, Starfighter
+pil-jan|Jango Fett|Separatist|uncommon|7|7|6|Firespray-31, Firespray, Starfighter
+pil-zor|Zorii Bliss|Resistance|common|5|5|6|BTA-NR2 Y-wing, Y-wing, Freighter
+pil-her|Hera Syndulla|Rebel|common|7|5|3|YT-2400 Freighter, YT, Freighter, Starfighter
+pil-pha|Captain Phasma|First Order|common|5|5|5|TIE/fo Fighter, TIE
+pil-obi|Obi-Wan Kenobi|Galactic Republic|uncommon|7|7|4|Jedi Starfighter (Eta-2 Actis), Jedi Starfighter (Delta-7B Aethersprite), Jedi Starfighter, Starfighter
+pil-war|Warthog|Galactic Republic|uncommon|7|6|4|BTL Y-wing, Y-wing, ARC-170, ARC, Bomber
+pil-ig|IG-100 MagnaGuard|Separatist|uncommon|9|8|3|Belbullab-22, Belbullab, Starfighter
+pil-cie|Cienna Rhee|Empire|uncommon|6|6|6|TIE/ln Fighter, TIE/IN Interceptor, TIE, Starfighter
+pil-vad|Darth Vader|Empire|rare|9|9|5|TIE/x1 Advanced, Jedi Starfighter (Eta-2 Actis), TIE, Starfighter
+pil-ahs|Ahsoka Tano|Galactic Republic|veryRare|8|7|8|Jedi Starfighter (Eta-2 Actis), Jedi Starfighter (Delta-7B Aethersprite), Jedi Starfighter, RZ-1 A-wing, A-wing, Starfighter
+pil-han|Han Solo|Rebel|rare|8|8|8|YT-1300 Freighter, YT-2400 Freighter, YT, Freighter, X-wing
+pil-mer|General Merrick|Rebel|rare|9|8|3|RZ-1 A-wing, A-wing, T-65 X-wing, X-wing, Starfighter
+pil-din|Din Djarin|Mandalorian|common|6|7|5|Razor Crest, Shuttle, Starfighter
+pil-bob|Boba Fett|Mandalorian|common|6|7|5|Firespray-31, Firespray, Starfighter
+pil-bok|Bo-Katan Kryze|Mandalorian|uncommon|5|8|4|Gauntlet Starfighter, Gauntlet, Kom'rk-class Fighter/Transport, Kom'rk-class, Shuttle, Starfighter

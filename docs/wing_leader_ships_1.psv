@@ -1,0 +1,34 @@
+id|name|faction|rarity|size|slot_top|slot_right|slot_bottom|slot_left|advantages|drawbacks|notes|role_class|model|sub_model
+ship-t70|T-70 X-wing|Resistance|common|Medium|Weapon|System|Engine|Shield|Combat Transformation||S-Foils; auto-first initiative Round 1|Starfighter|X-wing|T-70 X-wing
+ship-bta|BTA-NR2 Y-wing|Resistance|uncommon|Medium|Weapon|System|Engine|Shield|Removed Fairings (1), Bomber (1)||Exposed engines; ordinance fires twice per match|Bomber|Y-wing|BTA-NR2 Y-wing
+ship-yt1|YT-1300 Freighter|Resistance|uncommon|Large|Weapon|System|Engine|Shield|Tough (2)|Blind Spots|Offset cockpit; 2 items start with extra hit point|Freighter|YT|YT-1300
+ship-t65|T-65 X-wing|Rebel|uncommon|Medium|Weapon|System|Engine|Shield|Combat Transformation||S-Foils; auto-first initiative Round 1|Starfighter|X-wing|T-65 X-wing
+ship-btl|BTL Y-wing|Rebel|common|Medium|Weapon|System|Engine|Shield|Removed Fairings (1), Bomber (1)|Fragile (1)|Exposed engines; 1 item starts at DS1|Bomber|Y-wing|BTL Y-wing
+ship-yt2|YT-2400 Freighter|Rebel|rare|Large|Weapon|System|Engine|Shield||Blind Spots|Offset cockpit|Freighter|YT|YT-2400
+ship-tied|TIE Defender|Empire|rare|Small|Weapon|System|Engine|Shield|Solar Wings (3)||Triple solar wings; +3 EP per round|Starfighter|TIE|TIE/d Defender
+ship-tief|TIE Fighter|Empire|common|Small|Weapon|System|Engine|Blank|Solar Wings (2)|Blind Spots, Fragile (2)|Wings block rear view; 2 items start at DS1; +2 EP|Starfighter|TIE|TIE/ln Fighter
+ship-lamb|Lambda-class Shuttle|Empire|uncommon|Large|Weapon|System|Engine|Shield||Blind Spots|Wings obstruct rear visibility|Shuttle|Lambda-class|
+ship-tiew|TIE Whisper|First Order|rare|Small|Weapon|System|Engine|Shield|Solar Wings (3)||Triple solar wings; +3 EP per round|Starfighter|TIE|TIE/wi Whisper
+ship-fotie|FO TIE Fighter|First Order|common|Small|Weapon|System|Engine|Blank|Solar Wings (2)|Blind Spots, Fragile (1)|Wings block rear view; 1 item starts at DS1; +2 EP|Starfighter|TIE|TIE/fo Fighter
+ship-upsi|Upsilon-class Shuttle|First Order|uncommon|Large|Weapon|System|Engine|Shield|Tough (2)|Blind Spots|Variable geometry wings obstruct; 2 items have extra hit point|Shuttle|Upsilon-class|
+ship-belb|Belbullab-22|Separatist|rare|Small|Weapon|System|Engine|Shield|Gunship||May equip 1 extra weapon beyond engine capacity at no power cost|Starfighter|Belbullab|Belbullab-22
+ship-fanb|Fanblade Starfighter|Separatist|uncommon|Small|Weapon|System|Engine|Shield|Combat Transformation, Rotating Cockpit (10)||Fan deploys at combat start; cockpit stays level; +10 Comfort|Starfighter|Fanblade|
+ship-shea|Sheathipede Shuttle|Separatist|common|Large|Weapon|System|Engine|Shield||Fragile (2)|Not built for combat; 2 items start at DS1|Shuttle|Sheathipede-class|
+ship-jedi|Jedi Starfighter|Galactic Republic|rare|Small|Weapon|System|Engine|Blank|||No shield slot; Force-assisted piloting reflected via pilot traits|Starfighter|Jedi Starfighter|Eta-2 Actis
+ship-jedi-d7b|Jedi Starfighter|Galactic Republic|rare|Small|Weapon|System|Engine|Blank|||Delta-7B variant; same stats as Eta-2 Actis|Starfighter|Jedi Starfighter|Delta-7B Aethersprite
+ship-arc|ARC-170|Galactic Republic|common|Medium|Weapon|System|Engine|Shield|Gunship, Tough (2)||Rear gun position; 2 items have extra hit point|Starfighter|ARC|ARC-170
+ship-nu|Nu-class Shuttle|Galactic Republic|uncommon|Large|Weapon|System|Engine|Shield|||No quirks; size handles its limitations|Shuttle|Nu-class|
+ship-rz1|RZ-1 A-wing|Rebel|uncommon|Small|Weapon|System|Engine|Shield|Fast (15)|Fragile (1)|Fastest ship in the Rebel fleet; lightly built|Interceptor|A-wing|RZ-1 A-wing
+ship-rz2|RZ-2 A-wing|Resistance|uncommon|Small|Weapon|System|Engine|Shield|Fast (10)|Fragile (1)|Updated A-wing; slightly more capable, marginally slower|Interceptor|A-wing|RZ-2 A-wing
+ship-bwing|A/SF-01 B-wing|Rebel|rare|Medium|Weapon|System|Engine|Shield|Combat Transformation, Rotating Cockpit (10)||Gyroscopic cockpit; cross-wing deploys at combat start|Starfighter|B-wing|A/SF-01 B-wing
+ship-uwing|UT-60D U-wing|Rebel|common|Large|Weapon|System|Engine|Shield|Combat Transformation, Tough (1)|Blind Spots|Wings lock forward for attack run; folding geometry creates blind spots|Shuttle|U-wing|UT-60D U-wing
+ship-tiein|TIE/IN Interceptor|Empire|uncommon|Small|Weapon|System|Engine|Blank|Solar Wings (2), Fast (10)||Cutout panels solve TIE Fighter blind spot; no shields slot like TIE Fighter|Interceptor|TIE|TIE/IN Interceptor
+ship-tiex1|TIE/x1 Advanced|Empire|veryRare|Small|Weapon|System|Engine|Shield|Solar Wings (2), Tough (1)||Vader's personal fighter; swept wings no blind spots; reinforced frame; has shields|Starfighter|TIE|TIE/x1 Advanced
+ship-tiesa|TIE/sa Bomber|Empire|rare|Medium|Weapon|System|Engine|Shield|Solar Wings (1), Bomber (2), Tough (1)|Fragile (1)|Double-hull design; shield generator in secondary hull; dedicated ordnance delivery|Bomber|TIE|TIE/sa Bomber
+ship-firespray|Firespray-31|Mandalorian|common|Medium|Weapon|System|Engine|Shield|Rotating Cockpit (10), Gunship, Tough (1)||Ship rotates in flight; cockpit orientation changes; dorsal and ventral gun positions|Starfighter|Firespray|Firespray-31
+ship-komrk|Kom'rk-class Fighter/Transport|Mandalorian|uncommon|Medium|Weapon|System|Engine|Shield|Combat Transformation, Tough (1)|Blind Spots|Wings fold out for combat; wing geometry creates blind spots when deployed|Shuttle|Kom'rk-class|Kom'rk-class Fighter/Transport
+ship-gauntlet|Gauntlet Starfighter|Mandalorian|rare|Large|Weapon|System|Engine|Shield|Combat Transformation, Tough (2)||Mandalorian heavy assault craft; dramatic wing deployment; extremely tough frame|Shuttle|Gauntlet|
+ship-omicron|Omicron-class Attack Shuttle|Galactic Republic|uncommon|Medium|Weapon|System|Engine|Shield|Combat Transformation, Tough (1)||Wings deploy for combat configuration; Bad Batch variant most iconic|Shuttle|Omicron-class|Omicron-class Attack Shuttle
+ship-echelon|TIE Echelon|First Order|uncommon|Large|Weapon|System|Engine|Shield|Tough (2)|Blind Spots|Purpose-built First Order combat transport; more capable than standard troop transports|Shuttle|TIE|TIE/rp Echelon
+ship-geo|Geonosian Fighter|Separatist|common|Small|Weapon|System|Engine|Shield|Solar Wings (1)|Fragile (2)|Bio-mechanical construction; energy-collecting wings; notoriously delicate|Starfighter|Geonosian|
+ship-razorcrest|Razor Crest|Mandalorian|rare|Large|Weapon|System|Engine|Shield|Tough (2)|Blind Spots, Fragile (1)|Pre-Imperial military patrol craft; sturdy hull but old and poorly maintained|Shuttle|Razor Crest|

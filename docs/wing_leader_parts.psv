@@ -1,0 +1,174 @@
+id|name|category|variation|rarity|mit|powersW|powersSh|powersS|powersAny|epBonus|desc
+p-bc-v1|Blaster Cannon|Weapon|V1|common|||||||Quality -1 step damage.
+p-bt-v1|Blaster Turret|Weapon|V1|common|||||||Quality -1 step damage. Can only Snap Shot. Can shoot Tailing ships.
+p-mis-v1|Missile|Weapon|V1|common|||||||Quality +2 damage. Single-use. Can't snap shot. Can't be repaired.
+p-bc-v2|Blaster Cannon|Weapon|V2|common|||||||Quality -1 step damage.
+p-bt-v2|Blaster Turret|Weapon|V2|common|||||||Quality -1 step damage. Can only Snap Shot. Can shoot Tailing ships.
+p-mis-v2|Missile|Weapon|V2|common|||||||Quality +2 damage. Single-use. Can't snap shot. Can't be repaired.
+p-bc-tlc-v2|Blaster Cannon TLC|Weapon|V2|common|||||||Quality -1 step damage.
+p-bt-tlc-v2|Blaster Turret TLC|Weapon|V2|common|||||||Quality -1 step damage. Can only Snap Shot. Can shoot Tailing ships.
+p-bc-v4|Blaster Cannon|Weapon|V4|common|||||||Quality -1 step damage.
+p-bt-v4|Blaster Turret|Weapon|V4|common|||||||Quality -1 step damage. Can only Snap Shot. Can shoot Tailing ships.
+p-mis-v4|Missile|Weapon|V4|common|||||||Quality +2 damage. Single-use. Can't snap shot. Can't be repaired.
+p-bc-tlc-v4|Blaster Cannon TLC|Weapon|V4|common|||||||Quality -1 step damage.
+p-bt-tlc-v4|Blaster Turret TLC|Weapon|V4|common|||||||Quality -1 step damage. Can only Snap Shot. Can shoot Tailing ships.
+p-abl-v1|Ablative Armor|Shield/Armor|V1|common|1||||||Does not take Power. Mitigation 1. Standard degradation.
+p-abl-v2|Ablative Armor|Shield/Armor|V2|common|1||||||Does not take Power. Mitigation 1. Standard degradation.
+p-abl-ex-v2|Ablative Armor Ex|Shield/Armor|V2|common|1||||||Does not take Power. Mitigation 1. Standard degradation.
+p-abl-v4|Ablative Armor|Shield/Armor|V4|common|1||||||Does not take Power. Mitigation 1. Standard degradation.
+p-abl-ex-v4|Ablative Armor Ex|Shield/Armor|V4|common|1||||||Does not take Power. Mitigation 1. Standard degradation.
+p-lsh-v1|Light Shields|Shield/Armor|V1|common|1||||||Mitigation 1. Regenerates 1 at the end of each round.
+p-lsh-v2|Light Shields|Shield/Armor|V2|common|1||||||Mitigation 1. Regenerates 1 at the end of each round.
+p-lsh-ex-v2|Light Shields Ex|Shield/Armor|V2|common|1||||||Mitigation 1. Regenerates 1 at the end of each round.
+p-lsh-v4|Light Shields|Shield/Armor|V4|common|1||||||Mitigation 1. Regenerates 1 at the end of each round.
+p-lsh-ex-v4|Light Shields Ex|Shield/Armor|V4|common|1||||||Mitigation 1. Regenerates 1 at the end of each round.
+p-le-v1|Light Engine|Engine|V1|common||2|0|1|||
+p-le-ae-v1|Light Engine Ae|Engine|V1|common||2|1|0|||
+p-le-v2|Light Engine|Engine|V2|common||2|1|1|||
+p-le-ae-v2|Light Engine Ae|Engine|V2|common||2|2|0|||
+p-le-v4|Light Engine|Engine|V4|common||2|1|2|||
+p-le-ae-v4|Light Engine Ae|Engine|V4|common||2|2|1|||
+p-cs-v1|Comm Scrambler|System|V1|common|||||||Block one enemy System this round.
+p-cs-v2|Comm Scrambler|System|V2|common|||||||Block one enemy System this round.
+p-cs-v4|Comm Scrambler|System|V4|common|||||||Block one enemy System this round.
+p-dc-v1|Deflector Coils|System|V1|common|||||||Efficiency Test: Shields do not Weaken.
+p-dc-v2|Deflector Coils|System|V2|common|||||||Efficiency Test: Shields do not Weaken.
+p-dc-v4|Deflector Coils|System|V4|common|||||||Efficiency Test: Shields do not Weaken.
+p-fi-v1|Fuel Injector|System|V1|common|||||||Once/match: treat ship as one size smaller for EP.
+p-fi-v2|Fuel Injector|System|V2|common|||||||Once/match: treat ship as one size smaller for EP.
+p-fi-v4|Fuel Injector|System|V4|common|||||||Once/match: treat ship as one size smaller for EP.
+p-prox-v1|Proximity Sensors|System|V1|common|||||||Passive. Initiative advantage OOP→Tailed.
+p-prox-v2|Proximity Sensors|System|V2|common|||||||Passive. Initiative advantage OOP→Tailed.
+p-prox-v4|Proximity Sensors|System|V4|common|||||||Passive. Initiative advantage OOP→Tailed.
+p-ts-v1|Targeting Scope|System|V1|common|||||||Passive. Low Quality vs Tailed = Standard.
+p-ts-v2|Targeting Scope|System|V2|common|||||||Passive. Low Quality vs Tailed = Standard.
+p-ts-v4|Targeting Scope|System|V4|common|||||||Passive. Low Quality vs Tailed = Standard.
+p-tlc-c-v1|Twin-Linked Laser Cannon|Weapon|V1|rare|||||||Two attacks. Normal damage.
+p-tlc-t-v1|Twin-Linked Laser Turret|Weapon|V1|rare|||||||Two attacks. Can only Snap Shot. Can shoot Tailing ships.
+p-pt-v1|Photon Torpedo|Weapon|V1|rare|||||||Quality +3 damage. Single-use. Can't snap shot. Can't be repaired.
+p-tlc-c-v2|Twin-Linked Laser Cannon|Weapon|V2|rare|||||||Two attacks. Normal damage.
+p-tlc-t-v2|Twin-Linked Laser Turret|Weapon|V2|rare|||||||Two attacks. Can only Snap Shot. Can shoot Tailing ships.
+p-pt-v2|Photon Torpedo|Weapon|V2|rare|||||||Quality +3 damage. Single-use. Can't snap shot. Can't be repaired.
+p-tlc-c-tlc-v2|Twin-Linked Laser Cannon TLC|Weapon|V2|rare|||||||Two attacks. Normal damage.
+p-tlc-t-tlc-v2|Twin-Linked Laser Turret TLC|Weapon|V2|rare|||||||Two attacks. Can only Snap Shot. Can shoot Tailing ships.
+p-tlc-c-v4|Twin-Linked Laser Cannon|Weapon|V4|rare|||||||Two attacks. Normal damage.
+p-tlc-t-v4|Twin-Linked Laser Turret|Weapon|V4|rare|||||||Two attacks. Can only Snap Shot. Can shoot Tailing ships.
+p-pt-v4|Photon Torpedo|Weapon|V4|rare|||||||Quality +3 damage. Single-use. Can't snap shot. Can't be repaired.
+p-tlc-c-tlc-v4|Twin-Linked Laser Cannon TLC|Weapon|V4|rare|||||||Two attacks. Normal damage.
+p-tlc-t-tlc-v4|Twin-Linked Laser Turret TLC|Weapon|V4|rare|||||||Two attacks. Can only Snap Shot. Can shoot Tailing ships.
+p-chromiumarm-v1|Chromium Armor|Shield/Armor|V1|rare|2||||||Does not take Power. Mitigation 2. Reduced degradation.
+p-chromiumarm-v2|Chromium Armor|Shield/Armor|V2|rare|2||||||Does not take Power. Mitigation 2. Reduced degradation.
+p-chromiumarm-ex-v2|Chromium Armor Ex|Shield/Armor|V2|rare|2||||||Does not take Power. Mitigation 2. Reduced degradation.
+p-chromiumarm-v4|Chromium Armor|Shield/Armor|V4|rare|2||||||Does not take Power. Mitigation 2. Reduced degradation.
+p-chromiumarm-ex-v4|Chromium Armor Ex|Shield/Armor|V4|rare|2||||||Does not take Power. Mitigation 2. Reduced degradation.
+p-militaryshi-v1|Military Shields|Shield/Armor|V1|rare|3||||||Mitigation 3. Regenerates 1 at the end of each round.
+p-militaryshi-v2|Military Shields|Shield/Armor|V2|rare|3||||||Mitigation 3. Regenerates 1 at the end of each round.
+p-militaryshi-ex-v2|Military Shields Ex|Shield/Armor|V2|rare|3||||||Mitigation 3. Regenerates 1 at the end of each round.
+p-militaryshi-v4|Military Shields|Shield/Armor|V4|rare|3||||||Mitigation 3. Regenerates 1 at the end of each round.
+p-militaryshi-ex-v4|Military Shields Ex|Shield/Armor|V4|rare|3||||||Mitigation 3. Regenerates 1 at the end of each round.
+p-pe-v1|Performance Engine|Engine|V1|rare||2|2|2||1|
+p-pe-v2|Performance Engine|Engine|V2|rare||2|2|2||1|
+p-pe-ex-v2|Performance Engine Ex|Engine|V2|rare||2|2|2||1|
+p-pe-v4|Performance Engine|Engine|V4|rare||2|2|2||1|
+p-pe-ex-v4|Performance Engine Ex|Engine|V4|rare||2|2|2||1|
+p-atc-v1|Adv. Targeting Comp.|System|V1|rare|||||||All Tailing attacks gain Shoot Twice.
+p-atc-v2|Adv. Targeting Comp.|System|V2|rare|||||||All Tailing attacks gain Shoot Twice.
+p-atc-v4|Adv. Targeting Comp.|System|V4|rare|||||||All Tailing attacks gain Shoot Twice.
+p-cd-v1|Collision Detector|System|V1|rare|||||||Efficiency Test: If shaken off Tailing position this round, automatically reacquire Tailing.
+p-cd-v3|Collision Detector|System|V3|rare|||||||Efficiency Test: If shaken off Tailing position this round, automatically reacquire Tailing.
+p-cd-v5|Collision Detector|System|V5|rare|||||||Efficiency Test: If shaken off Tailing position this round, automatically reacquire Tailing.
+p-cp-v1|Combat Predictor|System|V1|rare|||||||Efficiency Test: Advantage on gaining Tailing (roll twice, take better). Enemies suffer Disadvantage escaping from this ship.
+p-cp-v3|Combat Predictor|System|V3|rare|||||||Efficiency Test: Advantage on gaining Tailing (roll twice, take better). Enemies suffer Disadvantage escaping from this ship.
+p-cp-v5|Combat Predictor|System|V5|rare|||||||Efficiency Test: Advantage on gaining Tailing (roll twice, take better). Enemies suffer Disadvantage escaping from this ship.
+p-mt-v1|Maneuv. Thrusters|System|V1|rare|||||||Costs 1 EP. Net +1 EP this round on success.
+p-mt-v3|Maneuv. Thrusters|System|V3|rare|||||||Costs 1 EP. Net +1 EP this round on success.
+p-mt-v5|Maneuv. Thrusters|System|V5|rare|||||||Costs 1 EP. Net +1 EP this round on success.
+p-rsm-v1|Reactive Shield Matrix|System|V1|rare|||||||Shields absorb hit without Weakening on success.
+p-rsm-v3|Reactive Shield Matrix|System|V3|rare|||||||Shields absorb hit without Weakening on success.
+p-rsm-v5|Reactive Shield Matrix|System|V5|rare|||||||Shields absorb hit without Weakening on success.
+p-tsim-v1|Trajectory Simulator|System|V1|rare|||||||Reveal selected maneuver of Tailing/Tailed ship.
+p-tsim-v3|Trajectory Simulator|System|V3|rare|||||||Reveal selected maneuver of Tailing/Tailed ship.
+p-tsim-v5|Trajectory Simulator|System|V5|rare|||||||Reveal selected maneuver of Tailing/Tailed ship.
+p-lc-v1|Laser Cannon|Weapon|V1|uncommon|||||||Normal damage.
+p-lt-v1|Laser Turret|Weapon|V1|uncommon|||||||Can only Snap Shot. Can shoot Tailing ships.
+p-ion-v1|Ion Bomb|Weapon|V1|uncommon|||||||No damage. Target reduced to 0 power immediately, and half power (round up) next round. Single-use. Can't snap shot. Can't be repaired.
+p-lc-v2|Laser Cannon|Weapon|V2|uncommon|||||||Normal damage.
+p-lt-v2|Laser Turret|Weapon|V2|uncommon|||||||Can only Snap Shot. Can shoot Tailing ships.
+p-ion-v2|Ion Bomb|Weapon|V2|uncommon|||||||No damage. Target reduced to 0 power immediately, and half power (round up) next round. Single-use. Can't snap shot. Can't be repaired.
+p-lc-tlc-v2|Laser Cannon TLC|Weapon|V2|uncommon|||||||Normal damage.
+p-lt-tlc-v2|Laser Turret TLC|Weapon|V2|uncommon|||||||Can only Snap Shot. Can shoot Tailing ships.
+p-lc-v4|Laser Cannon|Weapon|V4|uncommon|||||||Normal damage.
+p-lt-v4|Laser Turret|Weapon|V4|uncommon|||||||Can only Snap Shot. Can shoot Tailing ships.
+p-ion-v4|Ion Bomb|Weapon|V4|uncommon|||||||No damage. Target reduced to 0 power immediately, and half power (round up) next round. Single-use. Can't snap shot. Can't be repaired.
+p-lc-tlc-v4|Laser Cannon TLC|Weapon|V4|uncommon|||||||Normal damage.
+p-lt-tlc-v4|Laser Turret TLC|Weapon|V4|uncommon|||||||Can only Snap Shot. Can shoot Tailing ships.
+p-arm-v1|Armor|Shield/Armor|V1|uncommon|2||||||Does not take Power. Mitigation 2. Standard degradation.
+p-arm-v2|Armor|Shield/Armor|V2|uncommon|2||||||Does not take Power. Mitigation 2. Standard degradation.
+p-arm-ex-v2|Armor Ex|Shield/Armor|V2|uncommon|2||||||Does not take Power. Mitigation 2. Standard degradation.
+p-arm-v4|Armor|Shield/Armor|V4|uncommon|2||||||Does not take Power. Mitigation 2. Standard degradation.
+p-arm-ex-v4|Armor Ex|Shield/Armor|V4|uncommon|2||||||Does not take Power. Mitigation 2. Standard degradation.
+p-shi-v1|Shields|Shield/Armor|V1|uncommon|2||||||Mitigation 2. Regenerates 1 at the end of each round.
+p-shi-v2|Shields|Shield/Armor|V2|uncommon|2||||||Mitigation 2. Regenerates 1 at the end of each round.
+p-shi-ex-v2|Shields Ex|Shield/Armor|V2|uncommon|2||||||Mitigation 2. Regenerates 1 at the end of each round.
+p-shi-v4|Shields|Shield/Armor|V4|uncommon|2||||||Mitigation 2. Regenerates 1 at the end of each round.
+p-shi-ex-v4|Shields Ex|Shield/Armor|V4|uncommon|2||||||Mitigation 2. Regenerates 1 at the end of each round.
+p-se-v1|Standard Engine|Engine|V1|uncommon||2|0|1||1|
+p-se-ae-v1|Standard Engine Ae|Engine|V1|uncommon||2|1|0||1|
+p-se-v2|Standard Engine|Engine|V2|uncommon||2|1|1||1|
+p-se-ae-v2|Standard Engine Ae|Engine|V2|uncommon||2|2|0||1|
+p-se-ex-v2|Standard Engine Ex|Engine|V2|uncommon||2|1|1||1|
+p-se-aeex-v2|Standard Engine AeEx|Engine|V2|uncommon||2|2|0||1|
+p-seae-v4|Standard Engine  Ae|Engine|V4|uncommon||2|2|1||1|
+p-se-v4|Standard Engine|Engine|V4|uncommon||2|1|2||1|
+p-se-aeex-v4|Standard Engine AeEx|Engine|V4|uncommon||2|2|1||1|
+p-se-ex-v4|Standard Engine Ex|Engine|V4|uncommon||2|1|2||1|
+p-ami-v1|Astromech Interface|System|V1|uncommon|||||||Re-roll one failed Efficiency Test/round.
+p-ami-v2|Astromech Interface|System|V2|uncommon|||||||Re-roll one failed Efficiency Test/round.
+p-ami-v4|Astromech Interface|System|V4|uncommon|||||||Re-roll one failed Efficiency Test/round.
+p-ic-v1|Inertial Compensator|System|V1|uncommon|||||||Passive. Response while Tailed +1 quality.
+p-ic-v2|Inertial Compensator|System|V2|uncommon|||||||Passive. Response while Tailed +1 quality.
+p-ic-v4|Inertial Compensator|System|V4|uncommon|||||||Passive. Response while Tailed +1 quality.
+p-sa-v1|Sensor Array|System|V1|uncommon|||||||Passive. Reveals enemy EP above/below 3 each round.
+p-sa-v2|Sensor Array|System|V2|uncommon|||||||Passive. Reveals enemy EP above/below 3 each round.
+p-sa-v4|Sensor Array|System|V4|uncommon|||||||Passive. Reveals enemy EP above/below 3 each round.
+p-sc-v1|Shield Capacitor|System|V1|uncommon|||||||Once/match: restore Shields from Weakened.
+p-sc-v2|Shield Capacitor|System|V2|uncommon|||||||Once/match: restore Shields from Weakened.
+p-sc-v4|Shield Capacitor|System|V4|uncommon|||||||Once/match: restore Shields from Weakened.
+p-tp-v1|Target Painter|System|V1|uncommon|||||||All attacks vs one enemy +1 quality this round.
+p-tp-v2|Target Painter|System|V2|uncommon|||||||All attacks vs one enemy +1 quality this round.
+p-tp-v4|Target Painter|System|V4|uncommon|||||||All attacks vs one enemy +1 quality this round.
+p-tri-c-v1|Tri-Linked Laser Cannon|Weapon|V1|veryRare|||||||Quality +1 step damage.
+p-tri-t-v1|Tri-Linked Laser Turret|Weapon|V1|veryRare|||||||Quality +1 step damage. Can only Snap Shot. Can shoot Tailing ships.
+p-dlpt-v1|Dual Launch Photon Torpedo|Weapon|V1|veryRare|||||||Two attacks. Quality +3 damage. Single-use. Can't snap shot. Can't be repaired.
+p-tur-l-c-v2|Turbolaser Cannon|Weapon|V2|veryRare|||||||Quality +1 step damage.
+p-tur-l-t-v2|Turbolaser Turret|Weapon|V2|veryRare|||||||Quality +1 step damage. Can only Snap Shot. Can shoot Tailing ships.
+p-dlpt-v2|Dual Launch Photon Torpedo|Weapon|V2|veryRare|||||||Two attacks. Quality +3 damage. Single-use. Can't snap shot. Can't be repaired.
+p-tur-l-c-tlc-v2|Turbolaser Cannon TLC|Weapon|V2|veryRare|||||||Quality +1 step damage.
+p-tur-l-t-tlc-v2|Turbolaser Turret TLC|Weapon|V2|veryRare|||||||Quality +1 step damage. Can only Snap Shot. Can shoot Tailing ships.
+p-tur-l-c-v4|Turbolaser Cannon|Weapon|V4|veryRare|||||||Quality +1 step damage.
+p-tur-l-t-v4|Turbolaser Turret|Weapon|V4|veryRare|||||||Quality +1 step damage. Can only Snap Shot. Can shoot Tailing ships.
+p-dlpt-v4|Dual Launch Photon Torpedo|Weapon|V4|veryRare|||||||Two attacks. Quality +3 damage. Single-use. Can't snap shot. Can't be repaired.
+p-tur-l-c-tlc-v4|Turbolaser Cannon TLC|Weapon|V4|veryRare|||||||Quality +1 step damage.
+p-tur-l-t-tlc-v4|Turbolaser Turret TLC|Weapon|V4|veryRare|||||||Quality +1 step damage. Can only Snap Shot. Can shoot Tailing ships.
+p-cras-v1|Chromium A&S|Shield/Armor|V1|veryRare|4||||||Mitigation 4. Regenerates 2 at the end of each round.
+p-cras-v2|Chromium A&S|Shield/Armor|V2|veryRare|4||||||Mitigation 4. Regenerates 2 at the end of each round.
+p-cras-ex-v2|Chromium A&S Ex|Shield/Armor|V2|veryRare|4||||||Mitigation 4. Regenerates 2 at the end of each round.
+p-cras-v4|Chromium A&S|Shield/Armor|V4|veryRare|4||||||Mitigation 4. Regenerates 2 at the end of each round.
+p-cras-ex-v4|Chromium A&S Ex|Shield/Armor|V4|veryRare|4||||||Mitigation 4. Regenerates 2 at the end of each round.
+p-me-v1|Military Engine|Engine|V1|veryRare|||||6||
+p-me-v2|Military Engine|Engine|V2|veryRare|||||6||
+p-me-ex-v2|Military Engine Ex|Engine|V2|veryRare|||||6||
+p-me-v4|Military Engine|Engine|V4|veryRare|||||6||
+p-me-ex-v4|Military Engine Ex|Engine|V4|veryRare|||||6||
+p-am-v1|Astromech|System|V1|veryRare|||||||Grant auto-success to compatible systems.
+p-am-v3|Astromech|System|V3|veryRare|||||||Grant auto-success to compatible systems.
+p-am-v5|Astromech|System|V5|veryRare|||||||Grant auto-success to compatible systems.
+p-epr-v1|Emergency Power Reroute|System|V1|veryRare|||||||Once/match: survive one extra round before Dead in Water.
+p-epr-v3|Emergency Power Reroute|System|V3|veryRare|||||||Once/match: survive one extra round before Dead in Water.
+p-epr-v5|Emergency Power Reroute|System|V5|veryRare|||||||Once/match: survive one extra round before Dead in Water.
+p-pfc-v1|Predictive Flight Comp.|System|V1|veryRare|||||||See one enemy maneuver before yours is chosen.
+p-pfc-v3|Predictive Flight Comp.|System|V3|veryRare|||||||See one enemy maneuver before yours is chosen.
+p-pfc-v5|Predictive Flight Comp.|System|V5|veryRare|||||||See one enemy maneuver before yours is chosen.
+p-sfp-v1|Stealth Field Projector|System|V1|veryRare|||||||Costs 2 EP. OOP snap shots fail this round.
+p-sfp-v3|Stealth Field Projector|System|V3|veryRare|||||||Costs 2 EP. OOP snap shots fail this round.
+p-sfp-v5|Stealth Field Projector|System|V5|veryRare|||||||Costs 2 EP. OOP snap shots fail this round.
