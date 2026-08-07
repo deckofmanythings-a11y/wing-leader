@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Star Wars: Wing Leader</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
 /* ─── SHARED ─────────────────────────────────────────────────────────────── */
 :root {
@@ -490,7 +491,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1000;
 // SHARED CONSTANTS & DATA
 // ═══════════════════════════════════════════════════════════════════════════
 
-const VERSION = '0.1.0';
+const VERSION = '0.2.0';
 
 function initDraftState() {
   PHASE_CONFIG = getPhaseConfig();
@@ -1654,6 +1655,7 @@ function draftConfirmPick(){
     }
     draftUpdateProgress();
     draftRenderCards();
+    if (typeof saveProgress === 'function') saveProgress('draft');
   });
 }
 
@@ -1668,6 +1670,7 @@ function draftInit(){
   draftUpdateRefPanel();
   draftUpdatePartsPanel();
   draftRenderCards();
+  if (typeof saveProgress === 'function') saveProgress('draft');
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1922,6 +1925,7 @@ function proceedToBuild(){
       }
     });
 
+    if (typeof saveProgress === 'function') saveProgress('build');
     showTitleCard(TITLE_CARDS.build, () => {
       showScreen('build');
       buildRenderAll();
@@ -2372,6 +2376,7 @@ function buildRenderAll(){
     btn.style.boxShadow = ready ? '0 0 32px rgba(255,170,0,0.5),0 4px 24px rgba(0,0,0,0.6)' : '0 4px 24px rgba(0,0,0,0.6)';
     btn.onclick = ready ? initBattleAssign : null;
   }
+  if (typeof saveProgressDebounced === 'function') saveProgressDebounced('build');
   } catch(err) {
     console.error("buildRenderAll error:", err);
     document.getElementById("board").innerHTML = `<div style="color:var(--red);font-family:'Share Tech Mono',monospace;padding:20px;font-size:11px;white-space:pre-wrap">BUILD ERROR:\n${err.message}\n\n${err.stack}</div>`;
@@ -2697,7 +2702,9 @@ function buildSquadronExport() {
 }
 
 function exportSquadron() {
-  const data = buildSquadronExport();
+  // Prefer the squadron already handed to the combat module (import screen);
+  // fall back to live build state
+  const data = squadrons.player || buildSquadronExport();
   const json = JSON.stringify(data, null, 2);
   const blob = new Blob([json], {type:'application/json'});
   const url  = URL.createObjectURL(blob);
@@ -2712,21 +2719,7 @@ function exportSquadron() {
 function launchCombat() {
   buildPilots = assignState.map(s=>s.pilot);
 
-  // Build and export versioned JSON
   const exportData = buildSquadronExport();
-  const now = new Date();
-  const ts = now.getFullYear() + '-' +
-    String(now.getMonth()+1).padStart(2,'0') + '-' +
-    String(now.getDate()).padStart(2,'0') + '_' +
-    String(now.getHours()).padStart(2,'0') + '-' +
-    String(now.getMinutes()).padStart(2,'0');
-  const blob = new Blob([JSON.stringify(exportData,null,2)],{type:'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `WingLeader_v${VERSION}_R${gameState.round}_${ts}_Player.json`;
-  a.click();
-  URL.revokeObjectURL(url);
 
   // Pass directly to combat and navigate
   showTitleCard(TITLE_CARDS.combat, ()=>{
@@ -2764,8 +2757,9 @@ function startPostCombat(result) {
   else if (result === 'opponent') gameState.record.losses++;
   else gameState.record.draws++;
 
-  // After Round 3 — game over, no Black Market
+  // After Round 3 — game over, no Black Market. Campaign save is cleared.
   if (gameState.round >= 3) {
+    if (typeof deleteSave === 'function') deleteSave();
     showGameOver();
     return;
   }
@@ -2815,6 +2809,7 @@ function showBmOffer() {
     `ROUND ${gameState.round} — ${gameState.record.wins}W ${gameState.record.losses}L ${gameState.record.draws}D`;
   bmRewardState.currentOffer = drawBmOffer();
   renderBmCards();
+  if (typeof saveProgress === 'function') saveProgress('bm');
 }
 
 function renderBmCards() {
@@ -2873,14 +2868,18 @@ function advanceRound() {
   });
 }
 
-showTitleCard(TITLE_CARDS.intro, () => {
-  showTitleCard(TITLE_CARDS.round(1), () => {
-    showTitleCard(TITLE_CARDS.draft, () => {
-      showScreen('draft');
-      draftInit();
+// Boot is driven by the auth module (bottom of page) — after login it calls
+// startNewCampaign() or resumeFromSave().
+function startNewCampaign() {
+  showTitleCard(TITLE_CARDS.intro, () => {
+    showTitleCard(TITLE_CARDS.round(1), () => {
+      showTitleCard(TITLE_CARDS.draft, () => {
+        showScreen('draft');
+        draftInit();
+      });
     });
   });
-});
+}
 
 
 // ─── COMBAT MODULE ───────────────
@@ -3914,7 +3913,6 @@ function runCombat() {
     renderSquadronPanels(combatState);
     document.getElementById('combatFooterInfo').textContent =
       `COMBAT ROUND ${combatState.round} / 12 — ${combatState.winner ? combatState.winner.toUpperCase() + ' WINS' : 'DRAW'}`;
-    downloadCombatLog(combatState);
     generateNarrative(combatState);
     // Show post-combat button after log renders
     setTimeout(()=>{
@@ -3930,7 +3928,15 @@ function runCombat() {
                  color:var(--bg);background:var(--cyan);border:none;padding:14px 48px;
                  border-radius:4px;cursor:pointer;">
           PROCEED TO BLACK MARKET →
-        </button>`;
+        </button>
+        <div style="margin-top:14px">
+          <button onclick="downloadCombatLog(combatState)"
+            style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;
+                   color:var(--text-dim);background:none;border:1px solid var(--border);
+                   padding:8px 20px;border-radius:3px;cursor:pointer;">
+            ⬇ DOWNLOAD COMBAT LOG
+          </button>
+        </div>`;
       logEl.appendChild(btn);
       logEl.scrollTop = logEl.scrollHeight;
     }, 500);
@@ -4301,6 +4307,10 @@ function renderSquadronPanels(state) {
         <div class="import-drop-text">CLICK OR DROP<br>SQUADRON JSON</div>
       </div>
       <div class="import-preview" id="playerPreview"></div>
+      <button onclick="exportSquadron()" style="font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--text-dim);background:none;border:1px solid var(--border);padding:8px 16px;border-radius:3px;cursor:pointer;align-self:flex-start;transition:all 0.15s"
+        onmouseover="this.style.color='var(--cyan)';this.style.borderColor='var(--cyan)'"
+        onmouseout="this.style.color='var(--text-dim)';this.style.borderColor='var(--border)'">
+        ⬇ EXPORT SQUADRON JSON</button>
     </div>
     <div class="import-side">
       <div>
@@ -4371,5 +4381,270 @@ function renderSquadronPanels(state) {
     <div id="bmCardGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;width:100%;margin-top:8px;"></div>
   </div>
 </div>
+<!-- ─── AUTH & CLOUD SAVE OVERLAYS ─────────────────────────────────────────── -->
+<div id="authOverlay" style="display:none;position:fixed;inset:0;z-index:3000;background:radial-gradient(ellipse at 50% 40%,#0a1628 0%,#030810 70%);align-items:center;justify-content:center;">
+  <div style="width:400px;max-width:90vw;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:36px 32px;box-shadow:0 8px 48px rgba(0,0,0,0.8);">
+    <div style="font-family:'Orbitron',monospace;font-size:11px;letter-spacing:3px;color:var(--text-dim);margin-bottom:2px">STAR WARS</div>
+    <div style="font-family:'Orbitron',monospace;font-size:24px;font-weight:900;letter-spacing:3px;color:var(--text);margin-bottom:6px">WING<span style="color:var(--cyan)">LEADER</span></div>
+    <div style="font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--amber);margin-bottom:28px">PILOT AUTHENTICATION REQUIRED</div>
+    <input id="authEmail" type="email" placeholder="EMAIL" autocomplete="email" style="width:100%;box-sizing:border-box;background:var(--bg);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:1px;padding:12px 14px;margin-bottom:12px;outline:none;" onfocus="this.style.borderColor='var(--cyan)'" onblur="this.style.borderColor='var(--border)'">
+    <input id="authPass" type="password" placeholder="PASSWORD" autocomplete="current-password" style="width:100%;box-sizing:border-box;background:var(--bg);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:1px;padding:12px 14px;margin-bottom:8px;outline:none;" onfocus="this.style.borderColor='var(--cyan)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')authSignIn()">
+    <div id="authError" style="font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--red);min-height:16px;margin-bottom:12px;"></div>
+    <button id="authSignInBtn" onclick="authSignIn()" style="width:100%;font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:3px;color:var(--bg);background:var(--cyan);border:none;padding:13px;border-radius:4px;cursor:pointer;margin-bottom:10px;">SIGN IN</button>
+    <button id="authSignUpBtn" onclick="authSignUp()" style="width:100%;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--text-dim);background:none;border:1px solid var(--border);padding:11px;border-radius:4px;cursor:pointer;" onmouseover="this.style.color='var(--cyan)';this.style.borderColor='var(--cyan)'" onmouseout="this.style.color='var(--text-dim)';this.style.borderColor='var(--border)'">CREATE NEW ACCOUNT</button>
+  </div>
+</div>
+
+<div id="resumeOverlay" style="display:none;position:fixed;inset:0;z-index:3000;background:radial-gradient(ellipse at 50% 40%,#0a1628 0%,#030810 70%);align-items:center;justify-content:center;">
+  <div style="width:440px;max-width:90vw;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:36px 32px;text-align:center;box-shadow:0 8px 48px rgba(0,0,0,0.8);">
+    <div style="font-family:'Orbitron',monospace;font-size:16px;font-weight:700;letter-spacing:3px;color:var(--cyan);margin-bottom:8px">CAMPAIGN IN PROGRESS</div>
+    <div id="resumeDetail" style="font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--text-dim);letter-spacing:1px;margin-bottom:28px;line-height:1.8"></div>
+    <button onclick="resumeSavedGame()" style="width:100%;font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:3px;color:var(--bg);background:var(--cyan);border:none;padding:13px;border-radius:4px;cursor:pointer;margin-bottom:10px;">CONTINUE CAMPAIGN</button>
+    <button onclick="startFreshGame()" style="width:100%;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--text-dim);background:none;border:1px solid var(--border);padding:11px;border-radius:4px;cursor:pointer;" onmouseover="this.style.color='var(--red)';this.style.borderColor='var(--red)'" onmouseout="this.style.color='var(--text-dim)';this.style.borderColor='var(--border)'">ABANDON &amp; START NEW CAMPAIGN</button>
+  </div>
+</div>
+
+<div id="userChip" style="display:none;position:fixed;bottom:12px;left:12px;z-index:2500;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--text-dim);background:rgba(6,15,26,0.85);border:1px solid var(--border);border-radius:4px;padding:6px 10px;align-items:center;gap:10px;">
+  <span id="userChipEmail"></span>
+  <span id="saveStatusDot" title="Cloud save status" style="width:7px;height:7px;border-radius:50%;background:var(--border);display:inline-block"></span>
+  <a href="#" onclick="authSignOut();return false" style="color:var(--red);text-decoration:none">SIGN OUT</a>
+</div>
+
+<script>
+'use strict';
+// ═══════════════════════════════════════════════════════════════════════════
+// SUPABASE AUTH & CLOUD SAVES
+// ═══════════════════════════════════════════════════════════════════════════
+const SB_URL = 'https://uaoxvhihwiygrajicend.supabase.co';
+const SB_KEY = 'sb_publishable_91Zn_uJ9anW46vAClx6-bQ__wLL4fXl';
+const SB_TABLE = 'wl_saves';
+
+let sb = null;
+let sbUser = null;
+let pendingSave = null;   // save row fetched at login, awaiting resume choice
+
+function authShow(el, on) {
+  const node = document.getElementById(el);
+  if (node) node.style.display = on ? 'flex' : 'none';
+}
+function authErr(msg) {
+  document.getElementById('authError').textContent = msg || '';
+}
+
+async function initAuth() {
+  if (!window.supabase) {
+    // CDN unreachable — play without accounts rather than a dead page
+    console.warn('supabase-js failed to load; starting offline session');
+    startNewCampaign();
+    return;
+  }
+  sb = window.supabase.createClient(SB_URL, SB_KEY);
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) {
+    sbUser = session.user;
+    onAuthed();
+  } else {
+    authShow('authOverlay', true);
+  }
+}
+
+async function authSignIn() {
+  authErr('');
+  const email = document.getElementById('authEmail').value.trim();
+  const password = document.getElementById('authPass').value;
+  if (!email || !password) { authErr('EMAIL AND PASSWORD REQUIRED'); return; }
+  const { data, error } = await sb.auth.signInWithPassword({ email, password });
+  if (error) { authErr(error.message.toUpperCase()); return; }
+  sbUser = data.user;
+  authShow('authOverlay', false);
+  onAuthed();
+}
+
+async function authSignUp() {
+  authErr('');
+  const email = document.getElementById('authEmail').value.trim();
+  const password = document.getElementById('authPass').value;
+  if (!email || !password) { authErr('EMAIL AND PASSWORD REQUIRED'); return; }
+  if (password.length < 6) { authErr('PASSWORD MUST BE AT LEAST 6 CHARACTERS'); return; }
+  const { data, error } = await sb.auth.signUp({ email, password });
+  if (error) { authErr(error.message.toUpperCase()); return; }
+  if (!data.session) { authErr('CHECK YOUR EMAIL TO CONFIRM YOUR ACCOUNT, THEN SIGN IN'); return; }
+  sbUser = data.user;
+  authShow('authOverlay', false);
+  onAuthed();
+}
+
+async function authSignOut() {
+  if (sb) await sb.auth.signOut();
+  window.location.reload();
+}
+
+function showUserChip() {
+  const chip = document.getElementById('userChip');
+  document.getElementById('userChipEmail').textContent = (sbUser?.email || 'PILOT').toUpperCase();
+  chip.style.display = 'flex';
+}
+
+async function onAuthed() {
+  showUserChip();
+  const { data, error } = await sb.from(SB_TABLE).select('state').maybeSingle();
+  if (error) console.warn('save fetch failed:', error.message);
+  const save = data?.state;
+  if (save && save.marker && save.gameState) {
+    pendingSave = save;
+    const gs = save.gameState;
+    const phase = save.marker === 'draft' ? 'DRAFT PHASE' : save.marker === 'build' ? 'BUILD PHASE' : 'BLACK MARKET';
+    document.getElementById('resumeDetail').innerHTML =
+      `ROUND ${gs.round} OF 3 — ${phase}<br>` +
+      `RECORD: ${gs.record.wins}W — ${gs.record.losses}L — ${gs.record.draws}D<br>` +
+      `<span style="color:var(--text-dim)">SAVED ${save.savedAt ? new Date(save.savedAt).toLocaleString() : ''}</span>`;
+    authShow('resumeOverlay', true);
+  } else {
+    startNewCampaign();
+  }
+}
+
+function resumeSavedGame() {
+  authShow('resumeOverlay', false);
+  try {
+    resumeFromSave(pendingSave);
+  } catch (err) {
+    console.error('resume failed:', err);
+    alert('Resume failed (' + err.message + ') — starting a new campaign.');
+    startFreshGame();
+  }
+}
+
+async function startFreshGame() {
+  authShow('resumeOverlay', false);
+  pendingSave = null;
+  await deleteSave();
+  startNewCampaign();
+}
+
+// ─── SNAPSHOT / RESUME ──────────────────────────────────────────────────────
+
+function buildSaveSnapshot(marker) {
+  // Part objects that live only in the runtime registry (shop instances,
+  // black market copies) must ride along or they vanish on reload.
+  const partObjects = {};
+  Object.values(gameState.persistedBoards).forEach(b =>
+    Object.keys(b.placed || {}).forEach(pid => {
+      const p = getPart(pid);
+      if (p) partObjects[pid] = p;
+    }));
+  if (marker === 'build') hand.forEach(p => { partObjects[p.id] = p; });
+  return {
+    marker,
+    gameState: JSON.parse(JSON.stringify(gameState)),
+    draftState: marker === 'draft'
+      ? { ...JSON.parse(JSON.stringify({ ...draftState, usedIds: undefined })), usedIds: [...draftState.usedIds] }
+      : null,
+    hand: marker === 'build' ? hand.map(p => p.id) : null,
+    partObjects,
+    bm: marker === 'bm'
+      ? { total: bmRewardState.totalRewards, claimed: bmRewardState.claimed }
+      : null,
+    savedAt: new Date().toISOString(),
+    version: VERSION,
+  };
+}
+
+let _saveTimer = null;
+let _saveBusy = false;
+
+function setSaveDot(color) {
+  const dot = document.getElementById('saveStatusDot');
+  if (dot) dot.style.background = color;
+}
+
+async function saveProgress(marker) {
+  if (!sb || !sbUser) return;
+  const snapshot = buildSaveSnapshot(marker);
+  _saveBusy = true;
+  setSaveDot('var(--amber)');
+  const { error } = await sb.from(SB_TABLE).upsert({
+    user_id: sbUser.id,
+    state: snapshot,
+    version: VERSION,
+    updated_at: new Date().toISOString(),
+  });
+  _saveBusy = false;
+  if (error) { console.warn('cloud save failed:', error.message); setSaveDot('var(--red)'); }
+  else setSaveDot('var(--green)');
+}
+
+function saveProgressDebounced(marker) {
+  if (!sb || !sbUser) return;
+  clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(() => saveProgress(marker), 1500);
+}
+
+async function deleteSave() {
+  if (!sb || !sbUser) return;
+  const { error } = await sb.from(SB_TABLE).delete().eq('user_id', sbUser.id);
+  if (error) console.warn('save delete failed:', error.message);
+}
+
+function resumeFromSave(save) {
+  // Restore persistent state
+  Object.keys(gameState).forEach(k => delete gameState[k]);
+  Object.assign(gameState, save.gameState);
+  PHASE_CONFIG = getPhaseConfig();
+  // Re-register every known part object (drafted, black market, shop instances)
+  gameState.allParts.forEach(p => registerPart(p));
+  Object.values(save.partObjects || {}).forEach(p => registerPart(p));
+
+  if (save.marker === 'draft' && save.draftState) {
+    Object.assign(draftState, save.draftState);
+    draftState.usedIds = new Set(save.draftState.usedIds);
+    showScreen('draft');
+    draftUpdateProgress();
+    draftUpdateRefPanel();
+    draftUpdatePartsPanel();
+    draftRenderCards();
+  } else if (save.marker === 'build') {
+    const handParts = (save.hand || [])
+      .map(id => (save.partObjects || {})[id] || getPart(id))
+      .filter(Boolean);
+    buildInit(
+      gameState.allShips,
+      gameState.allPilots,
+      handParts,
+      new Array(gameState.allShips.length).fill(null)
+    );
+    // buildInit resets the registry base — re-add runtime objects
+    Object.values(save.partObjects || {}).forEach(p => registerPart(p));
+    gameState.allShips.forEach((ship, i) => {
+      const saved = gameState.persistedBoards[ship.id];
+      if (saved) {
+        shipBoards[i].grid = new Map(saved.grid);
+        shipBoards[i].placed = { ...saved.placed };
+      }
+    });
+    showScreen('build');
+    buildRenderAll();
+  } else if (save.marker === 'bm') {
+    bmRewardState.totalRewards = save.bm?.total || 1;
+    bmRewardState.claimed = save.bm?.claimed || 0;
+    bmRewardState.usedIds = new Set(gameState.blackMarketItems.map(i => i.id));
+    showBmOffer();
+  } else {
+    startNewCampaign();
+  }
+}
+
+// Flush pending debounced save when the tab is hidden or closing
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden' && _saveTimer) {
+    clearTimeout(_saveTimer);
+    const marker = document.getElementById('screen-build')?.classList.contains('active') ? 'build'
+                 : document.getElementById('screen-draft')?.classList.contains('active') ? 'draft' : null;
+    if (marker) saveProgress(marker);
+  }
+});
+
+window.addEventListener('DOMContentLoaded', initAuth);
+</script>
 </body>
 </html>
