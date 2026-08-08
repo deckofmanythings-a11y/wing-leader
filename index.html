@@ -87,6 +87,62 @@ header{display:flex;align-items:center;justify-content:space-between;padding:10p
 .part-conn-diagram{margin-top:10px;display:grid;grid-template-areas:". top ." "left center right" ". bottom .";grid-template-columns:1fr 80px 1fr;grid-template-rows:auto 80px auto;gap:6px;align-items:center;justify-items:center;}
 .pcd-top{grid-area:top;}.pcd-left{grid-area:left;}.pcd-right{grid-area:right;}.pcd-bottom{grid-area:bottom;}
 .pcd-center{grid-area:center;width:80px;height:80px;background:var(--bg3);border:2px solid;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:14px;font-family:'Orbitron',monospace;font-weight:700;letter-spacing:1px;text-align:center;padding:4px;}
+
+/* ─── LAYOUT-DRIVEN CARDS (Calibrate Mode) ──────────────────────────────── */
+.cardx-wrap{position:relative;overflow:hidden;box-sizing:border-box;background:var(--bg2);border:3px solid var(--border);border-radius:6px;cursor:pointer;transition:all 0.22s ease;animation:cardIn 0.35s ease both;width:100%;}
+.cardx-wrap:nth-child(1){animation-delay:0.04s}.cardx-wrap:nth-child(2){animation-delay:0.12s}.cardx-wrap:nth-child(3){animation-delay:0.2s}
+.cardx-wrap:hover{border-color:var(--cyan);box-shadow:var(--glow-cyan),inset 0 0 24px rgba(0,212,255,0.04);transform:translateY(-3px);}
+.cardx-wrap.selected{box-shadow:0 0 20px rgba(255,170,0,0.5),inset 0 0 24px rgba(255,170,0,0.07);transform:scale(1.02);outline:3px solid var(--amber);outline-offset:-1px;}
+.cardx-wrap.selected .select-btn{color:var(--amber);border-color:var(--amber);background:rgba(255,170,0,0.1);}
+.cardx{position:absolute;top:0;left:0;transform-origin:top left;}
+.cx-el{position:absolute;box-sizing:border-box;overflow:hidden;}
+.cx-cat{font-family:'Share Tech Mono',monospace;letter-spacing:3px;color:var(--text-dim);}
+.cx-name{font-family:'Orbitron',monospace;font-weight:700;letter-spacing:0.5px;line-height:1.15;}
+.cx-rar{font-family:'Share Tech Mono',monospace;letter-spacing:2px;}
+.cx-desc{color:var(--text-dim);line-height:1.45;}
+.cx-faction{letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;display:flex;align-items:center;}
+.cx-el .srow{display:flex;justify-content:space-between;align-items:center;}
+.cx-el .slabel{font-size:0.85em;}
+.cx-el .sval{font-size:1em;}
+.cx-el .slot-chip{font-size:0.85em;padding:2px 8px;}
+.cx-el .sbar-label{font-size:0.95em;min-width:5.2em;}
+.cx-el .sbar-num{font-size:0.95em;}
+.cx-el .sbar{height:4px;}
+.cx-rows,.cx-bars{display:flex;flex-direction:column;justify-content:space-evenly;}
+.cx-chips{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.cx-stage{width:100%;height:100%;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.cx-stage>div{flex-shrink:0;}
+.cx-el .select-btn{width:100%;height:100%;font-size:inherit;}
+
+/* ─── CALIBRATE MODE OVERLAY ─────────────────────────────────────────────── */
+#calOverlay{position:fixed;inset:0;z-index:4000;background:rgba(3,8,16,0.94);display:none;}
+#calStage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+#calStage .cardx-wrap{cursor:default;animation:none;}
+#calStage .cardx-wrap:hover{border-color:var(--border);box-shadow:none;transform:none;}
+.cal-box{position:absolute;box-sizing:border-box;border:1px dashed rgba(0,212,255,0.55);background:rgba(0,212,255,0.04);cursor:move;z-index:10;}
+.cal-box.cal-sel{border:2px solid var(--amber);background:rgba(255,170,0,0.08);z-index:11;}
+.cal-box .cal-tag{position:absolute;top:0;left:0;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--bg);background:rgba(0,212,255,0.75);padding:0 4px;pointer-events:none;white-space:nowrap;}
+.cal-box.cal-sel .cal-tag{background:var(--amber);}
+.cal-box .cal-dot{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:rgba(0,212,255,0.8);pointer-events:none;}
+.cal-box.cal-sel .cal-dot{background:var(--amber);}
+.cal-h{position:absolute;width:14px;height:14px;background:var(--cyan);border:2px solid var(--bg);box-sizing:border-box;z-index:12;}
+.cal-box.cal-sel .cal-h{background:var(--amber);}
+.cal-h.nw{left:-7px;top:-7px;cursor:nwse-resize}.cal-h.ne{right:-7px;top:-7px;cursor:nesw-resize}
+.cal-h.sw{left:-7px;bottom:-7px;cursor:nesw-resize}.cal-h.se{right:-7px;bottom:-7px;cursor:nwse-resize}
+#calToolbar{position:fixed;top:24px;right:24px;width:250px;background:var(--bg2);border:1px solid var(--cyan-dim);border-radius:6px;z-index:4100;font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text);box-shadow:0 8px 40px rgba(0,0,0,0.8);user-select:none;}
+#calToolbarHead{padding:8px 10px;background:var(--bg3);border-bottom:1px solid var(--border);cursor:grab;display:flex;justify-content:space-between;align-items:center;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;color:var(--cyan);border-radius:6px 6px 0 0;}
+#calToolbarHead span{cursor:pointer;color:var(--red);font-size:14px;padding:0 4px;}
+#calToolbar .cal-sec{padding:8px 10px;border-bottom:1px solid var(--border);}
+#calToolbar .cal-row{display:flex;justify-content:space-between;align-items:center;margin:3px 0;}
+#calToolbar button{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--text);background:var(--bg3);border:1px solid var(--border);border-radius:3px;padding:5px 8px;cursor:pointer;}
+#calToolbar button:hover{border-color:var(--cyan);color:var(--cyan);}
+#calToolbar button.on{border-color:var(--cyan);color:var(--cyan);background:rgba(0,212,255,0.1);}
+#calDpad{display:grid;grid-template-columns:repeat(3,34px);grid-template-rows:repeat(3,30px);gap:3px;justify-content:center;margin:6px 0 2px;}
+#calDpad button{padding:0;font-size:12px;}
+#calDpad .cal-step{display:flex;align-items:center;justify-content:center;color:var(--text-dim);font-size:10px;border:1px dashed var(--border);border-radius:3px;}
+#calExportModal{position:fixed;inset:0;z-index:4200;background:rgba(3,8,16,0.9);display:none;align-items:center;justify-content:center;}
+#calExportModal .cal-exp-panel{width:640px;max-width:92vw;background:var(--bg2);border:1px solid var(--cyan-dim);border-radius:6px;padding:20px;}
+#calExportModal textarea{width:100%;box-sizing:border-box;height:380px;background:var(--bg);color:var(--green);border:1px solid var(--border);border-radius:4px;font-family:'Share Tech Mono',monospace;font-size:11px;padding:10px;resize:vertical;white-space:pre;}
 .pip{width:14px;height:14px;border-radius:2px;border:2px solid currentColor;opacity:0.4;}
 .pip.on{opacity:1;}
 .parts-count-bar{margin-bottom:12px;}
@@ -491,7 +547,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:1000;
 // SHARED CONSTANTS & DATA
 // ═══════════════════════════════════════════════════════════════════════════
 
-const VERSION = '0.2.0';
+const VERSION = '0.3.0';
 
 function initDraftState() {
   PHASE_CONFIG = getPhaseConfig();
@@ -1459,9 +1515,51 @@ function drawOffer(pool) {
 
 
 
-function draftRenderCardBody(item){
-  const phase=PHASE_CONFIG[draftState.phase];
-  if(phase.key==='ships'){
+// ─── CARD LAYOUT TABLE ───────────────────────────────────────────────────────
+// All draft cards render from this coordinate table on a fixed reference
+// canvas, scaled to fit their grid cell. Edit visually via Calibrate Mode
+// (double-click the draft screen background), then Export and paste over this.
+let CARD_LAYOUT = {
+  card: { w: 640, h: 900 },
+  els: {
+    stripe:     { x: 0,   y: 0,   w: 640, h: 10 },
+    cat:        { x: 45,  y: 35,  w: 550, h: 28 },
+    name:       { x: 45,  y: 68,  w: 550, h: 88 },
+    rar:        { x: 45,  y: 160, w: 550, h: 26 },
+    headLine:   { x: 0,   y: 205, w: 640, h: 2 },
+    shipRows:   { x: 45,  y: 235, w: 550, h: 84 },
+    shipChips:  { x: 45,  y: 330, w: 550, h: 40 },
+    shipConn:   { x: 45,  y: 385, w: 550, h: 205 },
+    pilotBars:  { x: 45,  y: 235, w: 550, h: 150 },
+    pilotCerts: { x: 45,  y: 400, w: 550, h: 180 },
+    partRows:   { x: 45,  y: 235, w: 550, h: 120 },
+    partConn:   { x: 45,  y: 370, w: 550, h: 225 },
+    desc:       { x: 45,  y: 610, w: 550, h: 155 },
+    footLine:   { x: 0,   y: 782, w: 640, h: 2 },
+    faction:    { x: 45,  y: 800, w: 330, h: 64 },
+    selectBtn:  { x: 415, y: 798, w: 180, h: 68 },
+  },
+  fonts: {
+    cat: 22, name: 34, rar: 22, shipRows: 24, shipChips: 20,
+    pilotBars: 22, pilotCerts: 22, partRows: 24, desc: 24,
+    faction: 22, selectBtn: 24,
+  },
+};
+const CARD_LAYOUT_DEFAULTS = JSON.parse(JSON.stringify(CARD_LAYOUT));
+
+// Which layout elements exist for each card kind
+const CX_KIND_ELS = {
+  ships:  ['shipRows','shipChips','shipConn'],
+  pilots: ['pilotBars','pilotCerts'],
+  parts:  ['partRows','partConn'],
+};
+const CX_COMMON_ELS = ['stripe','cat','name','rar','headLine','desc','footLine','faction','selectBtn'];
+
+function cxVisibleEls(kind){ return [...CX_COMMON_ELS, ...(CX_KIND_ELS[kind]||[])]; }
+
+// Per-kind body element HTML, keyed by layout element name
+function cxBodyEls(item, kind){
+  if(kind==='ships'){
     const slotColors={'Weapon':'var(--col-W)','System':'var(--col-S)','Engine':'var(--col-E)','Shield':'var(--col-Sh)'};
     const chipHtml=item.slots.filter(s=>s!=='Blank').map(s=>`<span class="slot-chip" style="color:${slotColors[s]||'var(--text-dim)'};border-color:${slotColors[s]||'var(--border)'}">${s.toUpperCase().slice(0,3)}</span>`).join('');
     const sizeConnCount={Small:1,Medium:2,Large:3};
@@ -1469,11 +1567,12 @@ function draftRenderCardBody(item){
     const slotColorMap={'Weapon':'var(--col-W)','System':'var(--col-S)','Engine':'var(--col-E)','Shield':'var(--col-Sh)'};
     const topC=slotColorMap[item.slots[0]],rightC=slotColorMap[item.slots[1]],botC=slotColorMap[item.slots[2]],leftC=slotColorMap[item.slots[3]];
     const leftPips = item.slots[3]==='Blank' ? '' : renderPipsInline(cnt,leftC,true,true);
-    return`<div class="srow"><span class="slabel">FACTION</span><span class="sval" style="font-size:10px">${item.faction}</span></div>
-      <div class="srow" style="margin-top:4px"><span class="slabel">SIZE</span><span class="sval">${item.size}</span></div>
-      <div class="slot-row" style="margin-top:6px">${chipHtml}</div>
-      <div style="margin-top:10px">
-        <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:2px;margin-bottom:6px">CONNECTORS</div>
+    return {
+      shipRows: `<div class="srow"><span class="slabel">FACTION</span><span class="sval">${item.faction}</span></div>
+        <div class="srow"><span class="slabel">SIZE</span><span class="sval">${item.size}</span></div>`,
+      shipChips: chipHtml,
+      shipConn: `<div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:2px;margin-bottom:6px;text-align:center">CONNECTORS</div>
         <div class="part-conn-diagram">
           <div class="pcd-top">${renderPipsInline(cnt,topC,false,true)}</div>
           <div class="pcd-left">${leftPips}</div>
@@ -1481,9 +1580,10 @@ function draftRenderCardBody(item){
           <div class="pcd-right">${renderPipsInline(cnt,rightC,true,true)}</div>
           <div class="pcd-bottom">${renderPipsInline(cnt,botC,false,true)}</div>
         </div>
-      </div>`;
+      </div>`,
+    };
   }
-  if(phase.key==='pilots'){
+  if(kind==='pilots'){
     const stats=['piloting','gunnery','systems'];
     const labels=['PILOTING','GUNNERY','SYSTEMS'];
     const colors=['var(--cyan)','var(--amber)','var(--green)'];
@@ -1491,43 +1591,82 @@ function draftRenderCardBody(item){
       const v=item[s];const pct=(v/9)*100;
       return`<div class="sbar-row"><span class="sbar-label">${labels[i]}</span><div class="sbar"><div class="sbar-fill" style="width:${pct}%;background:${colors[i]}"></div></div><span class="sbar-num">${v}</span></div>`;
     }).join('');
-    return`${bars}<div class="srow" style="margin-top:6px"><span class="slabel">CERTS</span><span class="sval" style="font-size:11px;text-align:right;max-width:120px">${item.certs.join(', ')}</span></div>`;
+    return {
+      pilotBars: bars,
+      pilotCerts: `<div class="srow" style="align-items:flex-start"><span class="slabel">CERTS</span><span class="sval" style="text-align:right;max-width:75%">${item.certs.join(', ')}</span></div>`,
+    };
   }
-  if(phase.key==='parts'){
-    let extra=`<div class="srow"><span class="slabel">TYPE</span><span class="sval" style="font-size:10px">${item.category}</span></div>`;
-    if(item.mit!==undefined)extra+=`<div class="srow"><span class="slabel">MITIGATION</span><span class="sval">${item.mit}</span></div>`;
-    if(item.powersW!==undefined&&!item.powersAny)extra+=`<div class="srow"><span class="slabel">POWERS</span><span class="sval" style="font-size:11px">${item.powersW}W·${item.powersSh}Sh·${item.powersS}S</span></div>`;
-    if(item.powersAny)extra+=`<div class="srow"><span class="slabel">POWERS</span><span class="sval">${item.powersAny} any</span></div>`;
-    extra+=renderPartConnDiagram(item.variation,item.category);
-    return extra;
+  if(kind==='parts'){
+    let rows=`<div class="srow"><span class="slabel">TYPE</span><span class="sval">${item.category}</span></div>`;
+    if(item.mit!==undefined)rows+=`<div class="srow"><span class="slabel">MITIGATION</span><span class="sval">${item.mit}</span></div>`;
+    if(item.powersW!==undefined&&!item.powersAny)rows+=`<div class="srow"><span class="slabel">POWERS</span><span class="sval">${item.powersW}W·${item.powersSh}Sh·${item.powersS}S</span></div>`;
+    if(item.powersAny)rows+=`<div class="srow"><span class="slabel">POWERS</span><span class="sval">${item.powersAny} any</span></div>`;
+    return {
+      partRows: rows,
+      partConn: renderPartConnDiagram(item.variation,item.category),
+    };
   }
-  return'';
+  return {};
 }
+
+// ─── LAYOUT-DRIVEN CARD RENDERER ────────────────────────────────────────────
+function renderLayoutCard(item, kind, i, interactive=true){
+  const L=CARD_LAYOUT, C=L.card;
+  const rCol = rarColor(item.rarity||item.rar||'common');
+  const catColor = CAT_META[item.category]?.color || null;
+  const stripeColor = catColor || rCol;
+  const pos=k=>{const e=L.els[k];return `left:${e.x}px;top:${e.y}px;width:${e.w}px;height:${e.h}px;`};
+  const fs=k=>L.fonts[k]!==undefined?`font-size:${L.fonts[k]}px;`:'';
+  const el=(k,extra,inner)=>`<div class="cx-el cx-${k}" data-cx="${k}" style="${pos(k)}${fs(k)}${extra||''}">${inner||''}</div>`;
+  const body=cxBodyEls(item,kind);
+  const catText = kind==='parts' ? (item.category||'PART').toUpperCase() : kind.toUpperCase().replace(/S$/,'');
+  let bodyHtml='';
+  (CX_KIND_ELS[kind]||[]).forEach(k=>{
+    const cls = k==='shipRows'||k==='partRows' ? 'cx-rows' : k==='pilotBars' ? 'cx-bars' : k==='shipChips' ? 'cx-chips' : '';
+    const inner = (k==='shipConn'||k==='partConn') ? `<div class="cx-stage"><div>${body[k]||''}</div></div>` : body[k]||'';
+    bodyHtml += `<div class="cx-el ${cls}" data-cx="${k}" style="${pos(k)}${fs(k)}">${inner}</div>`;
+  });
+  const attrs = interactive ? `id="dcard-${i}" onclick="draftSelectCard(${i})"` : '';
+  return `<div class="cardx-wrap" ${attrs} style="aspect-ratio:${C.w}/${C.h};border-color:${rCol}">
+    <div class="cardx" style="width:${C.w}px;height:${C.h}px">
+      ${el('stripe',`background:${stripeColor};`)}
+      ${el('cat','',catText)}
+      ${el('name',`color:${rCol};`,displayName(item.name))}
+      ${el('rar','',`<span class="${rc(item.rarity)}">${rl(item.rarity)}${item.role_class?' '+item.role_class.toUpperCase():''}</span>`)}
+      ${el('headLine','background:var(--border);')}
+      ${bodyHtml}
+      ${el('desc','',item.desc||'')}
+      ${el('footLine','background:var(--border);')}
+      ${el('faction','',(item.faction||'').toUpperCase())}
+      ${el('selectBtn','',`<button class="select-btn">SELECT</button>`)}
+    </div>
+  </div>`;
+}
+
+// Scale each rendered card canvas to its wrapper, and fit conn-diagram stages
+function fitLayoutCards(){
+  document.querySelectorAll('.cardx-wrap').forEach(wrap=>{
+    const inner=wrap.querySelector('.cardx');
+    if(!inner)return;
+    wrap.style.aspectRatio=`${CARD_LAYOUT.card.w}/${CARD_LAYOUT.card.h}`;
+    const k=wrap.clientWidth/CARD_LAYOUT.card.w;
+    inner.style.transform=`scale(${k})`;
+    inner.querySelectorAll('.cx-stage').forEach(st=>{
+      const inn=st.firstElementChild;
+      if(!inn)return;
+      inn.style.transform='none';
+      const kk=Math.min(st.offsetWidth/Math.max(1,inn.offsetWidth), st.offsetHeight/Math.max(1,inn.offsetHeight));
+      inn.style.transform=`scale(${kk})`;
+    });
+  });
+}
+window.addEventListener('resize',fitLayoutCards);
 
 function draftRenderCards(){
   const grid=document.getElementById('cardGrid');
-  grid.innerHTML=draftState.currentOffer.map((item,i)=>{
-      const rCol = rarColor(item.rarity||item.rar||'common');
-      const catColor = CAT_META[item.category]?.color || null;
-      const stripeColor = catColor || rCol;
-      return `
-      <div class="card" id="dcard-${i}" onclick="draftSelectCard(${i})" style="border-color:${rCol}">
-        <div class="card-stripe" style="background:${stripeColor};height:4px"></div>
-        <div class="card-head">
-          <div class="card-cat">${PHASE_CONFIG[draftState.phase].key==='parts' ? (item.category||'PART').toUpperCase() : PHASE_CONFIG[draftState.phase].key.toUpperCase().replace(/S$/,'')}</div>
-          <div class="card-name" style="color:${rCol}">${displayName(item.name)}</div>
-          <div class="card-rar ${rc(item.rarity)}">${rl(item.rarity)}${item.role_class ? ' ' + item.role_class.toUpperCase() : ''}</div>
-        </div>
-        <div class="card-body">
-          <div class="card-stats">${draftRenderCardBody(item)}</div>
-          <div class="card-desc">${item.desc||''}</div>
-        </div>
-        <div class="card-foot">
-          <span class="card-faction">${item.faction||''}</span>
-          <button class="select-btn">SELECT</button>
-        </div>
-      </div>`;
-    }).join('');
+  const kind=PHASE_CONFIG[draftState.phase].key;
+  grid.innerHTML=draftState.currentOffer.map((item,i)=>renderLayoutCard(item,kind,i)).join('');
+  fitLayoutCards();
 }
 
 function draftUpdateProgress(){
@@ -1623,7 +1762,7 @@ function draftUpdatePartsPanel(){
 
 function draftSelectCard(index){
   draftState.selected=index;
-  document.querySelectorAll('.card').forEach((c,i)=>c.classList.toggle('selected',i===index));
+  document.querySelectorAll('#cardGrid .cardx-wrap').forEach((c,i)=>c.classList.toggle('selected',i===index));
   setTimeout(draftConfirmPick,220);
 }
 
@@ -4381,6 +4520,291 @@ function renderSquadronPanels(state) {
     <div id="bmCardGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;width:100%;margin-top:8px;"></div>
   </div>
 </div>
+<!-- ─── CALIBRATE MODE (dev tool — double-click draft background) ──────────── -->
+<style>#calStage .cardx-wrap{overflow:visible;}</style>
+<div id="calOverlay">
+  <div id="calStage"></div>
+  <div id="calToolbar">
+    <div id="calToolbarHead">CALIBRATE — CARDS<span id="calCloseX" onclick="calClose()">✕</span></div>
+    <div class="cal-sec" style="display:flex;gap:6px;justify-content:center">
+      <button id="calKind-ships" onclick="calSetKind('ships')">SHIP</button>
+      <button id="calKind-pilots" onclick="calSetKind('pilots')">PILOT</button>
+      <button id="calKind-parts" onclick="calSetKind('parts')">PART</button>
+    </div>
+    <div class="cal-sec">
+      <div class="cal-row"><span style="color:var(--cyan)" id="calSelName">— click a box —</span></div>
+      <div class="cal-row"><span>X <b id="calX">–</b></span><span>Y <b id="calY">–</b></span><span>W <b id="calW">–</b></span><span>H <b id="calH">–</b></span></div>
+    </div>
+    <div class="cal-sec">
+      <div class="cal-row"><span>FONT</span><span style="display:flex;align-items:center;gap:6px"><button onclick="calFont(-1)">A−</button><b id="calFontVal">–</b><button onclick="calFont(1)">A+</button></span></div>
+    </div>
+    <div class="cal-sec">
+      <div id="calDpad">
+        <button onclick="calNudge(-1,-1)">↖</button><button onclick="calNudge(0,-1)">↑</button><button onclick="calNudge(1,-1)">↗</button>
+        <button onclick="calNudge(-1,0)">←</button><div class="cal-step">5</div><button onclick="calNudge(1,0)">→</button>
+        <button onclick="calNudge(-1,1)">↙</button><button onclick="calNudge(0,1)">↓</button><button onclick="calNudge(1,1)">↘</button>
+      </div>
+      <div style="text-align:center;color:var(--text-dim);font-size:9px;letter-spacing:1px;margin-top:2px">SNAP 5PX · ARROW KEYS NUDGE</div>
+    </div>
+    <div class="cal-sec" style="display:flex;gap:6px;justify-content:center;border-bottom:none">
+      <button onclick="calReset()">RESET</button>
+      <button onclick="calExport()" style="color:var(--amber);border-color:var(--amber)">EXPORT</button>
+    </div>
+  </div>
+  <div id="calExportModal">
+    <div class="cal-exp-panel">
+      <div style="font-family:'Orbitron',monospace;font-size:12px;letter-spacing:2px;color:var(--cyan);margin-bottom:10px">EXPORT — CARD_LAYOUT</div>
+      <textarea id="calExportText" readonly spellcheck="false"></textarea>
+      <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
+        <button id="calCopyBtn" onclick="calCopy()" style="font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--bg);background:var(--cyan);border:none;border-radius:3px;padding:8px 16px;cursor:pointer">COPY TO CLIPBOARD</button>
+        <button onclick="document.getElementById('calExportModal').style.display='none'" style="font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--text);background:var(--bg3);border:1px solid var(--border);border-radius:3px;padding:8px 16px;cursor:pointer">CLOSE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+// ═══════════════════════════════════════════════════════════════════════════
+// CALIBRATE MODE — visual editor for CARD_LAYOUT
+// ═══════════════════════════════════════════════════════════════════════════
+const calState = { active:false, kind:'parts', sel:null, scale:1 };
+const CAL_SNAP = 5;
+const CAL_SPECIMENS = {
+  ships:  () => SHIPS.find(s=>s.id==='ship-t65')  || SHIPS[0],
+  pilots: () => PILOTS.find(p=>p.id==='pil-wed')  || PILOTS[0],
+  parts:  () => PARTS.find(p=>p.id==='p-shi-v2')  || PARTS[0],
+};
+
+function calOpen(){
+  calState.active = true;
+  document.getElementById('calOverlay').style.display = 'block';
+  calSetKind(calState.kind);
+}
+function calClose(){
+  calState.active = false;
+  document.getElementById('calOverlay').style.display = 'none';
+  document.getElementById('calExportModal').style.display = 'none';
+  // Re-render live cards with the edited layout
+  if (document.getElementById('screen-draft')?.classList.contains('active')) draftRenderCards();
+}
+function calSetKind(kind){
+  calState.kind = kind;
+  calState.sel = null;
+  ['ships','pilots','parts'].forEach(k =>
+    document.getElementById('calKind-'+k)?.classList.toggle('on', k===kind));
+  calRenderSpecimen();
+  calSyncToolbar();
+}
+
+function calRenderSpecimen(){
+  const stage = document.getElementById('calStage');
+  const item = CAL_SPECIMENS[calState.kind]();
+  stage.innerHTML = renderLayoutCard(item, calState.kind, 0, false);
+  const wrap = stage.querySelector('.cardx-wrap');
+  const C = CARD_LAYOUT.card;
+  const k = Math.min((window.innerHeight*0.88)/C.h, (window.innerWidth*0.55)/C.w);
+  wrap.style.width = (C.w*k + 6) + 'px';  // +6: 3px borders, border-box
+  fitLayoutCards();
+  calState.scale = wrap.clientWidth / C.w;
+  calBuildBoxes(wrap);
+  if (calState.sel) calSelect(calState.sel);
+}
+
+function calBuildBoxes(wrap){
+  const inner = wrap.querySelector('.cardx');
+  const keys = cxVisibleEls(calState.kind);
+  let html = keys.map(k => {
+    const e = CARD_LAYOUT.els[k];
+    return `<div class="cal-box" data-cal="${k}" style="left:${e.x}px;top:${e.y}px;width:${e.w}px;height:${e.h}px">
+      <span class="cal-tag">${k}</span><span class="cal-dot"></span>
+      ${['nw','ne','sw','se'].map(h=>`<span class="cal-h ${h}" data-h="${h}"></span>`).join('')}
+    </div>`;
+  }).join('');
+  html += `<div class="cal-box" data-cal="card" style="left:0;top:0;width:${CARD_LAYOUT.card.w}px;height:${CARD_LAYOUT.card.h}px;border-color:rgba(255,60,90,0.5);background:none;cursor:default;pointer-events:none">
+    <span class="cal-tag" style="top:auto;bottom:0;background:rgba(255,60,90,0.8)">card</span>
+    <span class="cal-h se" data-h="se" style="pointer-events:auto"></span>
+  </div>`;
+  inner.insertAdjacentHTML('beforeend', html);
+  inner.querySelectorAll('.cal-box').forEach(box =>
+    box.addEventListener('pointerdown', calPointerDown));
+}
+
+let calDrag = null;
+function calPointerDown(e){
+  const box = e.currentTarget;
+  const key = box.dataset.cal;
+  calSelect(key);
+  const h = e.target.dataset?.h || null;
+  if (key==='card' && !h) return;   // card body isn't draggable, only resizable
+  e.preventDefault(); e.stopPropagation();
+  const orig = key==='card'
+    ? { x:0, y:0, w:CARD_LAYOUT.card.w, h:CARD_LAYOUT.card.h }
+    : { ...CARD_LAYOUT.els[key] };
+  calDrag = { key, h, startX:e.clientX, startY:e.clientY, orig, box };
+  box.setPointerCapture(e.pointerId);
+  box.addEventListener('pointermove', calPointerMove);
+  box.addEventListener('pointerup', calPointerUp, { once:true });
+}
+function calPointerMove(e){
+  if (!calDrag) return;
+  const dx = (e.clientX - calDrag.startX) / calState.scale;
+  const dy = (e.clientY - calDrag.startY) / calState.scale;
+  const o = calDrag.orig;
+  const snap = v => Math.round(v/CAL_SNAP)*CAL_SNAP;
+  let n = { ...o };
+  if (!calDrag.h){
+    n.x = snap(o.x + dx); n.y = snap(o.y + dy);
+  } else {
+    if (calDrag.h.includes('e')) n.w = Math.max(CAL_SNAP, snap(o.w + dx));
+    if (calDrag.h.includes('s')) n.h = Math.max(CAL_SNAP, snap(o.h + dy));
+    if (calDrag.h.includes('w')){ const nx = snap(o.x + dx); n.w = Math.max(CAL_SNAP, o.w + (o.x - nx)); n.x = nx; }
+    if (calDrag.h.includes('n')){ const ny = snap(o.y + dy); n.h = Math.max(CAL_SNAP, o.h + (o.y - ny)); n.y = ny; }
+  }
+  calApply(calDrag.key, n);
+}
+function calPointerUp(){
+  if (calDrag) calDrag.box.removeEventListener('pointermove', calPointerMove);
+  calDrag = null;
+}
+
+function calApply(key, n){
+  if (key === 'card'){
+    CARD_LAYOUT.card.w = n.w; CARD_LAYOUT.card.h = n.h;
+    const wrap = document.querySelector('#calStage .cardx-wrap');
+    const inner = wrap.querySelector('.cardx');
+    inner.style.width = n.w+'px'; inner.style.height = n.h+'px';
+    const k = Math.min((window.innerHeight*0.88)/n.h, (window.innerWidth*0.55)/n.w);
+    wrap.style.aspectRatio = `${n.w}/${n.h}`;
+    wrap.style.width = (n.w*k + 6) + 'px';
+    fitLayoutCards();
+    calState.scale = wrap.clientWidth / n.w;
+    const cardBox = inner.querySelector('.cal-box[data-cal="card"]');
+    if (cardBox){ cardBox.style.width = n.w+'px'; cardBox.style.height = n.h+'px'; }
+  } else {
+    Object.assign(CARD_LAYOUT.els[key], n);
+    const inner = document.querySelector('#calStage .cardx');
+    const box = inner.querySelector(`.cal-box[data-cal="${key}"]`);
+    const elDiv = inner.querySelector(`.cx-el[data-cx="${key}"]`);
+    [box, elDiv].forEach(d => {
+      if (d){ d.style.left=n.x+'px'; d.style.top=n.y+'px'; d.style.width=n.w+'px'; d.style.height=n.h+'px'; }
+    });
+    if (key==='shipConn' || key==='partConn') fitLayoutCards();
+  }
+  calSyncToolbar();
+}
+
+function calSelect(key){
+  calState.sel = key;
+  document.querySelectorAll('#calStage .cal-box').forEach(b =>
+    b.classList.toggle('cal-sel', b.dataset.cal === key));
+  calSyncToolbar();
+}
+
+function calSyncToolbar(){
+  const key = calState.sel;
+  const set = (id,v) => { document.getElementById(id).textContent = v; };
+  document.getElementById('calSelName').textContent = key || '— click a box —';
+  if (!key){ set('calX','–'); set('calY','–'); set('calW','–'); set('calH','–'); set('calFontVal','–'); return; }
+  const e = key==='card' ? { x:0, y:0, w:CARD_LAYOUT.card.w, h:CARD_LAYOUT.card.h } : CARD_LAYOUT.els[key];
+  set('calX', e.x); set('calY', e.y); set('calW', e.w); set('calH', e.h);
+  set('calFontVal', CARD_LAYOUT.fonts[key] !== undefined ? CARD_LAYOUT.fonts[key]+'px' : '–');
+}
+
+function calFont(d){
+  const key = calState.sel;
+  if (!key || CARD_LAYOUT.fonts[key] === undefined) return;
+  CARD_LAYOUT.fonts[key] = Math.max(8, Math.min(120, CARD_LAYOUT.fonts[key] + d));
+  const elDiv = document.querySelector(`#calStage .cx-el[data-cx="${key}"]`);
+  if (elDiv) elDiv.style.fontSize = CARD_LAYOUT.fonts[key]+'px';
+  calSyncToolbar();
+}
+
+function calNudge(dx, dy){
+  const key = calState.sel;
+  if (!key || key==='card') return;
+  const e = CARD_LAYOUT.els[key];
+  calApply(key, { ...e, x:e.x+dx*CAL_SNAP, y:e.y+dy*CAL_SNAP });
+}
+
+function calReset(){
+  CARD_LAYOUT = JSON.parse(JSON.stringify(CARD_LAYOUT_DEFAULTS));
+  calRenderSpecimen();
+  calSyncToolbar();
+}
+
+function calExportTextGen(){
+  const L = CARD_LAYOUT;
+  let t  = '// ─── CARD LAYOUT TABLE ───────────────────────────────────────────────────────\n';
+  t += '// Generated by Calibrate Mode — paste over the existing CARD_LAYOUT in index.html\n';
+  t += 'let CARD_LAYOUT = {\n';
+  t += `  card: { w: ${L.card.w}, h: ${L.card.h} },\n`;
+  t += '  els: {\n';
+  Object.entries(L.els).forEach(([k,e]) => {
+    t += `    ${(k+':').padEnd(12)}{ x: ${e.x}, y: ${e.y}, w: ${e.w}, h: ${e.h} },\n`;
+  });
+  t += '  },\n  fonts: {\n';
+  Object.entries(L.fonts).forEach(([k,v]) => {
+    t += `    ${(k+':').padEnd(12)}${v},\n`;
+  });
+  t += '  },\n};\n';
+  return t;
+}
+function calExport(){
+  document.getElementById('calExportText').value = calExportTextGen();
+  document.getElementById('calExportModal').style.display = 'flex';
+}
+function calCopy(){
+  const ta = document.getElementById('calExportText');
+  const btn = document.getElementById('calCopyBtn');
+  const done = () => { btn.textContent='COPIED ✓'; setTimeout(()=>btn.textContent='COPY TO CLIPBOARD', 1500); };
+  if (navigator.clipboard?.writeText){
+    navigator.clipboard.writeText(ta.value).then(done).catch(()=>{ ta.select(); document.execCommand('copy'); done(); });
+  } else { ta.select(); document.execCommand('copy'); done(); }
+}
+
+// Toolbar dragging
+(function(){
+  const tb = document.getElementById('calToolbar');
+  const head = document.getElementById('calToolbarHead');
+  let d = null;
+  head.addEventListener('pointerdown', e => {
+    if (e.target.id === 'calCloseX') return;
+    d = { dx: e.clientX - tb.offsetLeft, dy: e.clientY - tb.offsetTop };
+    head.setPointerCapture(e.pointerId);
+  });
+  head.addEventListener('pointermove', e => {
+    if (!d) return;
+    tb.style.left = (e.clientX - d.dx)+'px';
+    tb.style.top  = (e.clientY - d.dy)+'px';
+    tb.style.right = 'auto';
+  });
+  head.addEventListener('pointerup', () => { d = null; });
+})();
+
+// Activation: double-click the draft screen background (not a card)
+document.addEventListener('dblclick', e => {
+  if (calState.active) return;
+  const scr = document.getElementById('screen-draft');
+  if (!scr || !scr.classList.contains('active')) return;
+  if (!scr.contains(e.target)) return;
+  if (e.target.closest('.cardx-wrap')) return;
+  calOpen();
+});
+
+// Keyboard: arrows nudge, Escape closes
+document.addEventListener('keydown', e => {
+  if (!calState.active) return;
+  const map = { ArrowLeft:[-1,0], ArrowRight:[1,0], ArrowUp:[0,-1], ArrowDown:[0,1] };
+  if (map[e.key]){ e.preventDefault(); calNudge(...map[e.key]); }
+  else if (e.key === 'Escape'){
+    const em = document.getElementById('calExportModal');
+    if (em.style.display === 'flex') em.style.display = 'none';
+    else calClose();
+  }
+});
+</script>
+
 <!-- ─── AUTH & CLOUD SAVE OVERLAYS ─────────────────────────────────────────── -->
 <div id="authOverlay" style="display:none;position:fixed;inset:0;z-index:3000;background:radial-gradient(ellipse at 50% 40%,#0a1628 0%,#030810 70%);align-items:center;justify-content:center;">
   <div style="width:400px;max-width:90vw;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:36px 32px;box-shadow:0 8px 48px rgba(0,0,0,0.8);">
